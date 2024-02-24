@@ -1,3 +1,5 @@
+# variable.tf
+
 variable "vpc_cidr" {
   description = "10.0.0.0/16"
 }
