@@ -21,6 +21,16 @@ resource "aws_subnet" "subnet_1" {
   }
 }
 
+resource "aws_subnet" "subnet_2" {
+  vpc_id            = aws_vpc.my_vpc.id
+  cidr_block        = var.subnet_2_cidr
+  availability_zone = var.az_2
+
+  tags = {
+    Name = "main_subnet2"
+  }
+}
+
 
 resource "aws_route_table" "public_route_table" {
   vpc_id       = aws_vpc.my_vpc.id
@@ -40,4 +50,9 @@ resource "aws_route_table" "public_route_table" {
 resource "aws_route_table_association" "public_subnet_1_route_table_association" {
   subnet_id           = aws_subnet.subnet_1.id
   route_table_id      = aws_route_table.public_route_table.id
+}
+
+resource "aws_route_table_association" "public_subnet_2_route_table_association" {
+  subnet_id      = aws_subnet.subnet_2.id
+  route_table_id = aws_route_table.public_route_table.id
 }
